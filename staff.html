@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Panel</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: red;
+            text-shadow: 0 0 10px red;
+        }
+        .switch-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .switch {
+            width: 80px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 0 15px red;
+        }
+        .switch:before {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px red;
+        }
+        .switch.on {
+            background-color: green;
+            box-shadow: 0 0 15px green;
+        }
+        .switch.on:before {
+            left: 45px;
+            background-color: lime;
+            box-shadow: 0 0 10px lime;
+        }
+    </style>
+</head>
+<body>
+    <h1>Panel del Staff</h1>
+    <div class="switch-container">
+        <span>Off</span>
+        <div class="switch" id="toggleSwitch"></div>
+        <span>On</span>
+    </div>
+
+    <script>
+        let switchElement = document.getElementById("toggleSwitch");
+
+        // Verificar estado guardado
+        if (localStorage.getItem("staffStatus") === "on") {
+            switchElement.classList.add("on");
+        }
+
+        switchElement.addEventListener("click", function() {
+            if (switchElement.classList.contains("on")) {
+                switchElement.classList.remove("on");
+                localStorage.setItem("staffStatus", "off");
+            } else {
+                switchElement.classList.add("on");
+                localStorage.setItem("staffStatus", "on");
+            }
+        });
+    </script>
+</body>
+</html>
